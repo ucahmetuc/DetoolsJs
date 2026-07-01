@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Logs / debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage / build output
+coverage/
+.nyc_output/
+dist/
+build/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Scratch (test outputs go to the OS temp dir, not the repo;
+# test/fixtures/**/*.bin stay tracked)
+scratch/
+tmp/

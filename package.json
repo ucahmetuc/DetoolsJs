@@ -1,0 +1,29 @@
+{
+  "name": "detools-js",
+  "version": "0.1.0",
+  "description": "Pure Node.js implementation of detools sequential bsdiff binary delta encoding with none/crle/heatshrink compression (detools-compatible patches).",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "bin": {
+    "detools-js": "bin/detools-js.js"
+  },
+  "scripts": {
+    "test": "node test/run.js"
+  },
+  "keywords": [
+    "detools",
+    "bsdiff",
+    "binary-diff",
+    "delta-encoding",
+    "patch",
+    "heatshrink",
+    "firmware",
+    "ota",
+    "arm-cortex-m"
+  ],
+  "author": "Ahmet Uçar",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
