@@ -226,11 +226,19 @@ function encode(fromData, toData, seg) {
 }
 
 // ---- create readers (apply side) -----------------------------------------
+function entryAt(sorted, index) {
+  const entry = sorted[index];
+  if (!entry) {
+    throw new Error('Corrupt data-format patch: block index out of range.');
+  }
+  return entry;
+}
+
 function writeZerosToFrom(fromZeroed, blocks, dict) {
   const sorted = [...dict.entries()].sort((x, y) => x[0] - y[0]);
   for (const { fromOffset, values } of blocks) {
     for (let i = 0; i < values.length; i++) {
-      const fromAddress = sorted[fromOffset + i][0];
+      const fromAddress = entryAt(sorted, fromOffset + i)[0];
       fromZeroed.fill(0, fromAddress, fromAddress + 4);
     }
   }
@@ -239,11 +247,14 @@ function writeZerosToFrom(fromZeroed, blocks, dict) {
 function writeValuesToDiff(fdiff, blocks, dict, packCallback) {
   const sorted = [...dict.entries()].sort((x, y) => x[0] - y[0]);
   for (const { fromOffset, toAddress, values } of blocks) {
-    const fromAddressBase = sorted[fromOffset][0];
+    const fromAddressBase = entryAt(sorted, fromOffset)[0];
     for (let i = 0; i < values.length; i++) {
-      const [fromAddress, fromValue] = sorted[fromOffset + i];
+      const [fromAddress, fromValue] = entryAt(sorted, fromOffset + i);
       const pos = toAddress + fromAddress - fromAddressBase;
       const bytes = packCallback(fromValue - values[i]); // = packCallback(toValue)
+      if (pos < 0 || pos + bytes.length > fdiff.length) {
+        throw new Error('Corrupt data-format patch: restore position out of range.');
+      }
       bytes.copy(fdiff, pos);
     }
   }

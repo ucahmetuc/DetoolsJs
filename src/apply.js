@@ -29,6 +29,9 @@ function applyPatch(fromData, patch) {
   }
 
   const toSize = unpackSize(reader);
+  if (toSize < 0) {
+    throw new Error('Corrupt patch: negative to_size.');
+  }
   if (toSize === 0) {
     return Buffer.alloc(0);
   }
