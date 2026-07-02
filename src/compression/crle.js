@@ -1,15 +1,9 @@
 'use strict';
 
-// Conditional Run Length Encoding (CRLE) — detools/compression/crle.py.
-//
-// Stream of segments, each: [kind:1][size:varint][data].
-//   kind SCATTERED(0): `size` literal bytes follow.
-//   kind REPEATED(1):  `size` is the repetition count, 1 byte follows.
-// Runs of >= MINIMUM_REPEATED_SIZE identical bytes become REPEATED segments;
-// everything else is SCATTERED.
-//
-// CRLE uses its own unsigned varint (NOT the signed pack_size used elsewhere):
-//   each byte holds 7 bits, high bit = continuation, last byte clears it.
+// Conditional RLE (detools/compression/crle.py). Segments of
+// [kind:1][size:varint][data]: SCATTERED(0) = literal bytes, REPEATED(1) = one
+// byte repeated `size` times. Runs >= MINIMUM_REPEATED_SIZE become REPEATED.
+// Uses its own unsigned varint (not the signed pack_size used elsewhere).
 
 const MINIMUM_REPEATED_SIZE = 6;
 const SCATTERED = 0;
@@ -42,12 +36,9 @@ function crleUnpackSize(buf, position) {
   return { value, position };
 }
 
-/**
- * Compress a full buffer to a CRLE stream identical to detools' output.
- * (Feeding the whole buffer at once produces the same bytes as detools'
- * incremental compress()+flush(), because CRLE only emits a segment once it
- * is definitively complete.)
- */
+// Compress a full buffer to a CRLE stream identical to detools' output
+// (whole-buffer input yields the same bytes as detools' incremental
+// compress()+flush(), since a segment is only emitted once it is complete).
 function compress(buffer) {
   const out = [];
 

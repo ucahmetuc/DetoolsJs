@@ -7,8 +7,14 @@
   "bin": {
     "detools-js": "bin/detools-js.js"
   },
+  "files": [
+    "src",
+    "bin",
+    "docs"
+  ],
   "scripts": {
-    "test": "node test/run.js"
+    "test": "node test/run.js",
+    "prepublishOnly": "node test/run.js"
   },
   "keywords": [
     "detools",
@@ -21,7 +27,7 @@
     "ota",
     "arm-cortex-m"
   ],
-  "author": "Ahmet Uçar",
+  "author": "Ahmet Ucar",
   "license": "MIT",
   "engines": {
     "node": ">=18"

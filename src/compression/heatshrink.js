@@ -1,16 +1,10 @@
 'use strict';
 
-// Heatshrink (LZSS) codec compatible with the heatshrink2 library detools
-// uses. The encoder is a faithful transliteration of the upstream
-// heatshrink_encoder.c (atomicobject/heatshrink) so its output is
-// byte-identical to detools' heatshrink patches for the same parameters.
-//
-// Stream is MSB-first bits:
-//   literal : tag bit 1, then 8 data bits
-//   backref : tag bit 0, then window_sz2 index bits (distance = index + 1),
-//             then lookahead_sz2 count bits (length = count + 1)
-// detools prepends a 1-byte header: bitstruct 'u4u4' of
-//   (window_sz2 - 4, lookahead_sz2 - 3).  Defaults 8/7 -> header byte 0x44.
+// Heatshrink (LZSS) codec, byte-identical to the heatshrink2 C library detools
+// uses (faithful port of upstream heatshrink_encoder.c). MSB-first bitstream:
+// literal = tag 1 + 8 bits; backref = tag 0 + window_sz2 index bits
+// (distance = index+1) + lookahead_sz2 count bits (length = count+1). detools
+// prepends a 1-byte header: ((window_sz2-4) << 4) | (lookahead_sz2-3).
 
 const DEFAULT_WINDOW_SZ2 = 8;
 const DEFAULT_LOOKAHEAD_SZ2 = 7;

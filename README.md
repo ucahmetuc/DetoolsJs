@@ -183,6 +183,20 @@ MCU: the container/varint/compression formats, the bsdiff apply loop, the full
 `arm-cortex-m4` transform (Thumb-2 disassembly + bit-exact `bl`/`b.w` encode with
 verified test vectors), and a low-RAM streaming strategy.
 
+## Not implemented (out of scope)
+
+detools has more surface than this port. The following are **not implemented**
+and raise a clear error if requested (they are not silent no-ops):
+
+- **Compression** `lzma`, `bz2`, `zstd`, `lz4` — thin wrappers over external C
+  libraries in detools, with no pure-JS equivalent. `createPatch`/`applyPatch`
+  throw for these. Implemented: `none`, `crle`, `heatshrink`.
+- **Patch types** `in-place`, `hdiffpatch`, `match-blocks`, and the standalone
+  `BSDIFF40` format. Only `sequential` + `bsdiff` is implemented; `applyPatch`
+  rejects other patch types.
+- **Data formats** `aarch64`, `xtensa-lx106` — declared but not implemented
+  (`create`/`apply` throw). Implemented: `arm-cortex-m4`.
+
 ## Limitations
 
 - **Degenerate inputs are slow.** bsdiff has a known worst case when the input is
@@ -191,8 +205,6 @@ verified test vectors), and a low-RAM streaming strategy.
   Realistic firmware — including large 0xFF erased-flash regions — is handled in
   well under a second (~140 ms for 512 KB), because those regions collapse into a
   single long match. No mitigation is applied so output stays identical to detools.
-- Only the `sequential` + `bsdiff` combination is implemented (no `hdiffpatch`,
-  `match-blocks`, `in-place`, or the `BSDIFF40` patch type).
 
 ## Tests
 

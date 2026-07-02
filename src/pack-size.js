@@ -1,14 +1,8 @@
 'use strict';
 
-// Variable-length integer encoding used by detools (the "size" encoding).
-//
-// First byte:  bit 6 (0x40) = sign (value is negative if set)
-//              bits 0-5 (0x3f) = low 6 bits of the magnitude
-//              bit 7 (0x80) = continuation (more bytes follow)
-// Following bytes: bit 7 (0x80) = continuation
-//                  bits 0-6 (0x7f) = next 7 bits of the magnitude
-//
-// Matches detools.common.unpack_size_with_length / detools.bsdiff.pack_size.
+// detools signed variable-length "size" integer.
+// First byte: bit 6 = sign, bits 0-5 = low magnitude bits, bit 7 = continuation.
+// Later bytes: bits 0-6 = 7 more magnitude bits, bit 7 = continuation.
 
 /**
  * Encode a signed integer into a detools size buffer.

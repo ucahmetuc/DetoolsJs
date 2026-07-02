@@ -1,15 +1,10 @@
 'use strict';
 
-// Pure-JS port of Colin Percival's bsdiff core (the algorithm detools'
-// C extension is based on). Produces a list of control entries that, when
-// applied as `out = (diff[i] + old[i]) & 0xff` followed by literal `extra`
-// bytes and an old-pointer `seek`, reconstruct the new file.
-//
-// The suffix array is built with qsufsort (O(n log n)); the search and the
-// forward/backward extension exactly follow bsdiff so the produced patches
-// are minimal and correct. The byte layout does not need to be identical to
-// detools' own output — detools `apply_patch` only requires a valid control
-// stream, which this produces.
+// Pure-JS port of Colin Percival's bsdiff (the algorithm detools' C extension
+// is based on): qsufsort suffix array + greedy match, emitting control entries
+// applied as `out = (diff[i] + old[i]) & 0xff`, then literal `extra`, then a
+// signed `seek`. Output need not match detools byte-for-byte, only decode via
+// detools apply_patch.
 
 /**
  * Build the suffix array of `old` into Int32Array I (length oldsize + 1).

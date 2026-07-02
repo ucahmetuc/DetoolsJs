@@ -1,14 +1,8 @@
 'use strict';
 
-// Registry of payload codecs. Each codec exposes:
-//   compress(buffer, opts) -> Buffer   (produces a stream detools can decode)
-//   decompress(buffer)     -> Buffer   (used by this package's own apply)
-//
-// Scope is intentionally limited to the codecs whose logic is wholly
-// detools' own (none, crle) plus heatshrink (an open, fully documented
-// bitstream reimplemented in pure JS). The other detools compressions
-// (lzma, bz2, zstd, lz4) delegate to external C libraries and are out of
-// scope here.
+// Payload codec registry. Each codec: compress(buffer, opts) / decompress(buffer).
+// Scope is limited to detools' own logic (none, crle) plus heatshrink (open,
+// pure-JS). lzma/bz2/zstd/lz4 wrap external C libraries and are out of scope.
 
 const none = require('./none');
 const crle = require('./crle');
