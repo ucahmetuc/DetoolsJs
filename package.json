@@ -9,8 +9,7 @@
   },
   "files": [
     "src",
-    "bin",
-    "docs"
+    "bin"
   ],
   "scripts": {
     "test": "node test/run.js",

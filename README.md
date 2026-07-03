@@ -17,7 +17,7 @@ pipeline.
 - [Compression](#compression)
 - [ARM data-format](#arm-cortex-m4-data-format)
 - [Patch format](#patch-format-sequential-bsdiff)
-- [Applying on an MCU (C decoder)](#applying-on-an-mcu-c-decoder)
+- [Not implemented](#not-implemented-out-of-scope)
 - [Limitations](#limitations)
 - [Tests](#tests)
 - [License](#license)
@@ -27,14 +27,11 @@ pipeline.
 Requires Node.js 18+. No dependencies.
 
 ```bash
-# from GitHub
-npm install github:<your-user>/detools-js
-# or clone and use directly
-git clone https://github.com/<your-user>/detools-js && cd detools-js
+npm install detools-js
 ```
 
-The CLI is exposed as `detools-js` (via `npm link` / `npx`) or run directly with
-`node bin/detools-js.js`.
+The CLI is exposed as `detools-js` (via `npx detools-js`) or run directly with
+`node bin/detools-js.js` from a checkout.
 
 ## Quick start
 
@@ -152,8 +149,7 @@ incremental updates; ~11 % averaged over a chain of releases). Verified byte-for
 byte against real detools on compiled Cortex-M4 firmware, both directions.
 
 > The reference detools **C** decoder does not implement the data-format transform,
-> so a device applying these patches must implement it too. See the
-> [C decoder guide](docs/C-DECODER-GUIDE.md).
+> so a device applying these patches must implement it too.
 
 ## Patch format (sequential bsdiff)
 
@@ -174,14 +170,6 @@ Apply: `out = (diff[i] + old[from+i]) & 0xff` for `diff_len` bytes, then copy
 `pack_size` is a variable-length signed int: the first byte holds the sign in bit
 6 and 6 magnitude bits with bit 7 as the continuation flag; following bytes hold 7
 magnitude bits each. (`crle` internally uses its own unsigned varint.)
-
-## Applying on an MCU (C decoder)
-
-[**docs/C-DECODER-GUIDE.md**](docs/C-DECODER-GUIDE.md) is a self-contained,
-byte-level specification for implementing the decoder in C on a RAM-constrained
-MCU: the container/varint/compression formats, the bsdiff apply loop, the full
-`arm-cortex-m4` transform (Thumb-2 disassembly + bit-exact `bl`/`b.w` encode with
-verified test vectors), and a low-RAM streaming strategy.
 
 ## Not implemented (out of scope)
 
