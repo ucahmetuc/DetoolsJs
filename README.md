@@ -20,6 +20,8 @@ pipeline.
 - [Not implemented](#not-implemented-out-of-scope)
 - [Limitations](#limitations)
 - [Tests](#tests)
+- [Feedback](#feedback)
+- [Acknowledgements](#acknowledgements)
 - [License](#license)
 
 ## Install
@@ -207,6 +209,29 @@ node test/fuzz.js              # randomized create->apply + garbage-patch robust
 `heatshrink2` installed; they skip cleanly if unavailable. Env knobs:
 `COMPRESSIONS`, `HS_WINDOW`, `HS_LOOKAHEAD`, `PYTHON`.
 
+## Feedback
+
+Bug reports, questions and feature suggestions are welcome on the
+[issue tracker](https://github.com/ucahmetuc/DetoolsJs/issues). For a bug, please
+include the detools-js version, Node.js version and, if possible, a minimal
+`from`/`to` image pair that reproduces it.
+
+## Acknowledgements
+
+detools-js is an independent re-implementation and is not affiliated with these
+projects:
+
+- [detools](https://github.com/eerimoq/detools) by Erik Moqvist: the patch format,
+  the `none`/`crle` codecs and the `arm-cortex-m4` data-format this package follows
+  (BSD-2-Clause).
+- [bsdiff](https://www.daemonology.net/bsdiff/) by Colin Percival: the diff
+  algorithm (BSD-2-Clause).
+- [heatshrink](https://github.com/atomicobject/heatshrink) by Scott Vokes: the
+  `heatshrink` codec (ISC).
+
+Their license texts are in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
+
 ## License
 
-MIT.
+MIT, see [LICENSE](LICENSE). Third-party notices: see
+[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).

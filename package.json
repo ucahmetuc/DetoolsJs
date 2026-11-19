@@ -1,6 +1,6 @@
 {
   "name": "detools-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Pure Node.js implementation of detools sequential bsdiff binary delta encoding with none/crle/heatshrink compression (detools-compatible patches).",
   "type": "commonjs",
   "main": "src/index.js",
@@ -9,7 +9,8 @@
   },
   "files": [
     "src",
-    "bin"
+    "bin",
+    "THIRD_PARTY_LICENSES.md"
   ],
   "scripts": {
     "test": "node test/run.js",
@@ -28,6 +29,14 @@
   ],
   "author": "Ahmet Ucar",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucahmetuc/DetoolsJs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ucahmetuc/DetoolsJs/issues"
+  },
+  "homepage": "https://github.com/ucahmetuc/DetoolsJs#readme",
   "engines": {
     "node": ">=18"
   }

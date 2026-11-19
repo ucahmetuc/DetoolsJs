@@ -5,6 +5,7 @@
 // literal = tag 1 + 8 bits; backref = tag 0 + window_sz2 index bits
 // (distance = index+1) + lookahead_sz2 count bits (length = count+1). detools
 // prepends a 1-byte header: ((window_sz2-4) << 4) | (lookahead_sz2-3).
+// Port of heatshrink (c) 2013-2015 Scott Vokes, ISC license: see THIRD_PARTY_LICENSES.md.
 
 const DEFAULT_WINDOW_SZ2 = 8;
 const DEFAULT_LOOKAHEAD_SZ2 = 7;

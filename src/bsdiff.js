@@ -3,8 +3,9 @@
 // Pure-JS port of Colin Percival's bsdiff (the algorithm detools' C extension
 // is based on): qsufsort suffix array + greedy match, emitting control entries
 // applied as `out = (diff[i] + old[i]) & 0xff`, then literal `extra`, then a
-// signed `seek`. Output need not match detools byte-for-byte, only decode via
-// detools apply_patch.
+// signed `seek`. Patches are byte-identical to detools' (see README).
+// Based on bsdiff (c) 2003-2005 Colin Percival and detools (c) 2019 Erik Moqvist,
+// BSD-2-Clause: see THIRD_PARTY_LICENSES.md.
 
 /**
  * Build the suffix array of `old` into Int32Array I (length oldsize + 1).
