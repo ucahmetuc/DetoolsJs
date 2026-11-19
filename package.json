@@ -1,6 +1,6 @@
 {
   "name": "detools-js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pure Node.js implementation of detools sequential bsdiff binary delta encoding with none/crle/heatshrink compression (detools-compatible patches).",
   "type": "commonjs",
   "main": "src/index.js",

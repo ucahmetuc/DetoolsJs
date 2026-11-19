@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a bug or an incompatibility with detools
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        detools-js is feature-complete for its scope and maintained on a best-effort
+        basis. Bug reports are welcome; feature requests are unlikely to be implemented.
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: detools-js, Node.js and (if compared) detools versions.
+      placeholder: detools-js 0.1.2, Node 20.11, detools 0.53.0
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: Command or options
+      description: The CLI command or `createPatch` / `applyPatch` call, including compression, heatshrink window/lookahead and data-format settings.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: A minimal `from`/`to` image pair (attach or link), or steps to generate one.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-actual
+    attributes:
+      label: Expected and actual result
+      description: Include error messages. If a patch differs from or fails in real detools, say what detools did.
+    validations:
+      required: true

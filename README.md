@@ -20,7 +20,7 @@ pipeline.
 - [Not implemented](#not-implemented-out-of-scope)
 - [Limitations](#limitations)
 - [Tests](#tests)
-- [Feedback](#feedback)
+- [Feedback and status](#feedback-and-status)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
 
@@ -209,12 +209,17 @@ node test/fuzz.js              # randomized create->apply + garbage-patch robust
 `heatshrink2` installed; they skip cleanly if unavailable. Env knobs:
 `COMPRESSIONS`, `HS_WINDOW`, `HS_LOOKAHEAD`, `PYTHON`.
 
-## Feedback
+## Feedback and status
 
-Bug reports, questions and feature suggestions are welcome on the
-[issue tracker](https://github.com/ucahmetuc/DetoolsJs/issues). For a bug, please
-include the detools-js version, Node.js version and, if possible, a minimal
-`from`/`to` image pair that reproduces it.
+Built for my own firmware tooling and shared in case it helps others. It is
+feature-complete for its scope (see [Not implemented](#not-implemented-out-of-scope))
+and I don't plan active development. Bug reports are welcome on the
+[issue tracker](https://github.com/ucahmetuc/DetoolsJs/issues) and handled on a
+best-effort basis; feature requests are unlikely to be implemented. The code is MIT,
+so forks are welcome.
+
+For a bug, please include the detools-js version, Node.js version and, if possible,
+a minimal `from`/`to` image pair that reproduces it.
 
 ## Acknowledgements
 
